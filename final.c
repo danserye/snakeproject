@@ -15,6 +15,8 @@ struct snake{
 
 void updateSnake(struct snake[], int, int);
 
+void createFood();
+
 int main(){
     int dir = RIGHT;
     int x, y, xMax, yMax, ch;
@@ -47,7 +49,7 @@ int main(){
         }
 
         wrefresh(win);
-        //moves the snake by coping the snakes position from the snake struct in front of it unless it is the head of snake then that will move depending on the key that is pressed
+        //moves the snake by copying the snakes position from the snake struct in front of it unless it is the head of snake then that will move depending on the key that is pressed
         while(1){
             ch = wgetch(win);
             if(ch == KEY_UP && dir != DOWN) dir = UP;
@@ -82,6 +84,7 @@ return 0;
 }
 
 void updateSnake(struct snake arr[], int length, int dir){
+//moves each cell of the snake's body as it is traveling in the given direction
     if (dir == UP){
         for(int i = 0;i<length;i++){
             if(arr[i].head){
@@ -127,3 +130,10 @@ void updateSnake(struct snake arr[], int length, int dir){
         }
     }
 }
+
+void createFood() {
+		//Food.x is a random int between 10 and maxX - 10
+		food.x = (rand() % (maxX - 20)) + 10;
+
+		//Food.y is a random int between 5 and maxY - 5
+		food.y = (rand() % (maxY - 10)) + 5;
